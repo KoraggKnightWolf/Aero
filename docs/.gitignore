@@ -1,1 +1,4 @@
-
+wiki/
+_site/
+._*
+Gemfile.lock
