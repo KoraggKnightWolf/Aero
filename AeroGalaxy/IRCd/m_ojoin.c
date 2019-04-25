@@ -58,10 +58,10 @@ mo_ojoin(struct MsgBuf *msgbuf_p, struct Client *client_p, struct Client *source
 	struct Channel *chptr;
 	int move_me = 0;
 
-	/* admins only */
-	if(!IsOperAdmin(source_p))
+	/* oper only */
+	if (!HasPrivilege(source_p, "oper:ojoin"))
 	{
-		sendto_one(source_p, form_str(ERR_NOPRIVS), me.name, source_p->name, "admin");
+		sendto_one(source_p, form_str(ERR_NOPRIVS), me.name, source_p->name, "oper:ojoin");
 		return;
 	}
 
