@@ -45,6 +45,11 @@ static void mo_okick(struct MsgBuf *msgbuf_p, struct Client *client_p, struct Cl
 struct Message okick_msgtab = {
 	"OKICK", 0, 0, 0, 0,
 	{mg_unreg, mg_not_oper, mg_ignore, mg_ignore, mg_ignore, {mo_okick, 4}}
+	if (!HasPrivilege(source_p, "oper:okick"))
+		{
+			sendto_one(source_p, form_str(ERR_NOPRIVS), me.name, source_p->name, "oper:okick");
+			return;
+		}
 };
 
 mapi_clist_av1 okick_clist[] = { &okick_msgtab, NULL };
